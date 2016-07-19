@@ -1,4 +1,6 @@
 # android-keyboardlistener
+![alt tag](https://img.shields.io/badge/Android%20Arsenal-android--keyboardlistener-green.svg?style=true)
+
 
 An Android Keyboard visibility listener based on the information from the following page:
 
