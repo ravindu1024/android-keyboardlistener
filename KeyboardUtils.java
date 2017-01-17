@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.content.Context;
 
 import java.util.HashMap;
 
@@ -64,6 +65,12 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
             sListenerMap.get(l).removeListener();
 
         sListenerMap.clear();
+    }
+
+    public static void toggleKeyboardVisibility(Context context)
+    {
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     private void removeListener()
