@@ -1,4 +1,6 @@
 # android-keyboardlistener
+![alt tag](https://img.shields.io/badge/Android%20Arsenal-android--keyboardlistener-green.svg?style=true)
+
 
 An Android Keyboard visibility listener based on the information from the following page:
 
@@ -15,7 +17,7 @@ Simply include this in your application and use as follows:
             }
     });
 
-
+The default height difference is set to 200dp but this may(probably not) need to be changed to adapt it for some screen sizes and densities. It is tested on 720x1280, 1080x1920 and 1440x2560 displays.  
 
 
 
