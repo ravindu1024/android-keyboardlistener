@@ -15,30 +15,31 @@ import java.util.HashMap;
  */
 public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
 {
-    @Override
-    public void onGlobalLayout()
-    {
-        Rect r = new Rect();
-        //r will be populated with the coordinates of your view that area still visible.
-        mRootView.getWindowVisibleDisplayFrame(r);
-
-        int heightDiff = mRootView.getRootView().getHeight() - (r.bottom - r.top);
-        float dp = heightDiff/ mScreenDensity;
-
-        if(mCallback != null)
-            mCallback.onToggleSoftKeyboard(dp > 200);
-    }
-
-    public interface SoftKeyboardToggleListener
-    {
-        void onToggleSoftKeyboard(boolean isVisible);
-    }
+    private final static int MAGIC_NUMBER = 200;
 
     private SoftKeyboardToggleListener mCallback;
     private View mRootView;
     private float mScreenDensity = 1;
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
+    public interface SoftKeyboardToggleListener
+    {
+        void onToggleSoftKeyboard(boolean isVisible);
+    }
+
+
+    @Override
+    public void onGlobalLayout()
+    {
+        Rect r = new Rect();
+        mRootView.getWindowVisibleDisplayFrame(r);
+
+        int heightDiff = mRootView.getRootView().getHeight() - (r.bottom - r.top);
+        float dp = heightDiff/ mScreenDensity;
+
+        if(mCallback != null)
+            mCallback.onToggleSoftKeyboard(dp > MAGIC_NUMBER);
+    }
 
 
     public static void addKeyboardToggleListener(Activity act, SoftKeyboardToggleListener listener)
@@ -73,6 +74,16 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
+    /**
+     * Closes the keyboard
+     * @param activeView the view with the keyboard focus
+     */
+    public static void forceCloseKeyboard(View activeView)
+    {
+        InputMethodManager inputMethodManager = (InputMethodManager) activeView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activeView.getWindowToken(), 0);
+    }
+
     private void removeListener()
     {
         mCallback = null;
@@ -89,7 +100,5 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
 
         mScreenDensity = act.getResources().getDisplayMetrics().density;
     }
-
-
 
 }
