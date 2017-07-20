@@ -4,7 +4,7 @@
 
 An Android Keyboard visibility listener based on the information from the following page:
 
-#Installation:
+# Installation:
 Simply download and copy this file to your project: https://github.com/ravindu1024/android-keyboardlistener/blob/master/keyboard-listener/src/main/java/com/rw/keyboardlistener/KeyboardUtils.java
 
 OR
@@ -28,7 +28,7 @@ And add this to your app gradle file:
 Thanks to the contributers on this page:
 http://stackoverflow.com/questions/2150078/how-to-check-visibility-of-software-keyboard-in-android
 
-#Usage:
+# Usage:
 
 Simply include this in your application and use as follows:
 
