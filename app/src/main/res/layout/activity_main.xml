@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.rw.keyboardutils.MainActivity"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.rw.keyboardutils.MainActivity">
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Register"
+            android:onClick="@{() -> activity.onRegisterClicked()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/unregister"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="UNREGISTER"
+            android:onClick="@{() -> activity.onUnregisterClicked()}"
+            app:layout_constraintLeft_toRightOf="@+id/register"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/forceclose"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="FORCE CLOSE"
+            android:onClick="@{() -> activity.onForceCloseClicked()}"
+            app:layout_constraintTop_toBottomOf="@+id/register"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <Button
+            android:id="@+id/toggle"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Toggle"
+            android:onClick="@{() -> activity.onToggleClicked()}"
+            app:layout_constraintLeft_toRightOf="@+id/forceclose"
+            app:layout_constraintTop_toBottomOf="@+id/unregister"/>
+
+        <TextView
+            android:id="@+id/visibility_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visibility: "
+            android:layout_marginLeft="16dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/forceclose"/>
+
+        <EditText
+            android:id="@+id/edit_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="click here to test"
+            android:inputType="textPersonName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/visibility_text"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="status"
+            app:layout_constraintTop_toTopOf="@+id/visibility_text"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>
