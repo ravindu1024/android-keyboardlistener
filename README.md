@@ -1,10 +1,34 @@
-# android-keyboardlistener
+# Android Keyboard Listener
 ![alt tag](https://img.shields.io/badge/Android%20Arsenal-android--keyboardlistener-green.svg?style=true)
 
 
 An Android Keyboard visibility listener based on the information from the following page:
 
+#Installation:
+Simply download and copy this file to your project: https://github.com/ravindu1024/android-keyboardlistener/blob/master/keyboard-listener/src/main/java/com/rw/keyboardlistener/KeyboardUtils.java
+
+OR
+
+Add this to your main gradle file:
+```gradle
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+And add this to your app gradle file:
+```gradle
+	dependencies {
+	        compile 'com.github.ravindu1024:android-keyboardlistener:1.0.0'
+	}
+```
+
+Thanks to the contributers on this page:
 http://stackoverflow.com/questions/2150078/how-to-check-visibility-of-software-keyboard-in-android
+
+#Usage:
 
 Simply include this in your application and use as follows:
 
