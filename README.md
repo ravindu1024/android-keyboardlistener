@@ -1,8 +1,10 @@
 # Android Keyboard Listener
+A keyboard visibility listener because Android doesn't provide an easy way to do this.
+
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--keyboardlistener-brightgreen.svg?style=flat-square)](https://android-arsenal.com/details/1/3915)
 
 
-An Android Keyboard visibility listener based on the information from the following page:
+The code is based on the information from the following page:
 
 # Installation:
 Simply download and copy this file to your project: https://github.com/ravindu1024/android-keyboardlistener/blob/master/keyboard-listener/src/main/java/com/rw/keyboardlistener/KeyboardUtils.java
