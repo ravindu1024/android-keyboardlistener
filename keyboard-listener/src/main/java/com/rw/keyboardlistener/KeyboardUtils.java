@@ -113,6 +113,24 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
         inputMethodManager.hideSoftInputFromWindow(activeView.getWindowToken(), 0);
     }
 
+    /**
+     * Closes soft keyboard
+     * @param context is the context where the keyboard was open from
+     */
+    public static void closeSoftKeyboard(Context context) {
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    /**
+     * Opens soft keyboard
+     * @param context is the context where the keyboard was open from
+     */
+    public static void openSoftKeyboard(Context context) {
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
+    }
+
     private void removeListener()
     {
         mCallback = null;
