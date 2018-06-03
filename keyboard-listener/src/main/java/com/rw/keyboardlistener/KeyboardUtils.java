@@ -21,7 +21,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
 
     private SoftKeyboardToggleListener mCallback;
     private View mRootView;
-    private Boolean prevValue = null;
+    public static Boolean sPrevValue = null;
     private float mScreenDensity = 1;
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
@@ -41,10 +41,18 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
         float dp = heightDiff/ mScreenDensity;
         boolean isVisible = dp > MAGIC_NUMBER;
 
-        if (mCallback != null && (prevValue == null || isVisible != prevValue)) {
-            prevValue = isVisible;
+        if (mCallback != null && (sPrevValue == null || isVisible != sPrevValue)) {
+            sPrevValue = isVisible;
             mCallback.onToggleSoftKeyboard(isVisible);
         }
+    }
+
+    /**
+     * Keyboard visibility getter
+     * @return whether the keyboard is shown or not.
+     */
+    public static boolean isKeyboardShown() {
+        return sPrevValue;
     }
 
     /**
