@@ -131,6 +131,18 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
         imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
     }
 
+    /**
+     * Force close keyboard which got open unnaturally using Activity
+     * @param activity is the activity where the keyboard was open from
+     */
+    public static void forceCloseSoftKeyboardByActivity(Activity activity) {
+        InputMethodManager inputManager = (InputMethodManager)
+                activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow((null == activity.getCurrentFocus()) ?
+                        null : activity.getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
     private void removeListener()
     {
         mCallback = null;
