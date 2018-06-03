@@ -21,7 +21,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
 
     private SoftKeyboardToggleListener mCallback;
     private View mRootView;
-    private Boolean prevValue = null;
+    public static Boolean sPrevValue = null;
     private float mScreenDensity = 1;
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
@@ -41,10 +41,18 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
         float dp = heightDiff/ mScreenDensity;
         boolean isVisible = dp > MAGIC_NUMBER;
 
-        if (mCallback != null && (prevValue == null || isVisible != prevValue)) {
-            prevValue = isVisible;
+        if (mCallback != null && (sPrevValue == null || isVisible != sPrevValue)) {
+            sPrevValue = isVisible;
             mCallback.onToggleSoftKeyboard(isVisible);
         }
+    }
+
+    /**
+     * Keyboard visibility getter
+     * @return whether the keyboard is shown or not.
+     */
+    public static boolean isKeyboardShown() {
+        return sPrevValue;
     }
 
     /**
@@ -103,6 +111,36 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
     {
         InputMethodManager inputMethodManager = (InputMethodManager) activeView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activeView.getWindowToken(), 0);
+    }
+
+    /**
+     * Closes soft keyboard
+     * @param context is the context where the keyboard was open from
+     */
+    public static void closeSoftKeyboard(Context context) {
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    /**
+     * Opens soft keyboard
+     * @param context is the context where the keyboard was open from
+     */
+    public static void openSoftKeyboard(Context context) {
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    /**
+     * Force close keyboard which got open unnaturally using Activity
+     * @param activity is the activity where the keyboard was open from
+     */
+    public static void forceCloseSoftKeyboardByActivity(Activity activity) {
+        InputMethodManager inputManager = (InputMethodManager)
+                activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow((null == activity.getCurrentFocus()) ?
+                        null : activity.getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     private void removeListener()
