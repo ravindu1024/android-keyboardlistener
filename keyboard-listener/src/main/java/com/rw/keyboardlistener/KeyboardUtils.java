@@ -22,7 +22,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
     private SoftKeyboardToggleListener mCallback;
     private View mRootView;
     private Boolean prevValue = null;
-    private float mScreenDensity = 1;
+    private float mScreenDensity;
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
     public interface SoftKeyboardToggleListener
@@ -92,7 +92,8 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
     public static void toggleKeyboardVisibility(Context context)
     {
         InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        if(inputMethodManager != null)
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     /**
@@ -102,7 +103,8 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener
     public static void forceCloseKeyboard(View activeView)
     {
         InputMethodManager inputMethodManager = (InputMethodManager) activeView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activeView.getWindowToken(), 0);
+        if(inputMethodManager != null)
+            inputMethodManager.hideSoftInputFromWindow(activeView.getWindowToken(), 0);
     }
 
     private void removeListener()
